@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 
 // Servir archivos estáticos desde la carpeta dist
-app.use(express.static(__dirname + '/dist/<reserva-hotel>'));
+app.use(express.static(__dirname + '/dist/reserva-hotel'));
 
 // Redirige todas las solicitudes al archivo index.html
 app.get('/*', function(req, res) {
