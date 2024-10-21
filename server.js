@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/dist/<reserva-hotel>'));
 
 // Redirige todas las solicitudes al archivo index.html
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/<reserva-hotel>/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/reserva-hotel/index.html'));
 });
 
 // Inicia el servidor en el puerto especificado por Railway o en el puerto 8080 por defecto
