@@ -2,17 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 
+import { InicioComponent } from '../reservaciones/inicio/inicio.component';
+import { RegistrarseInicioComponent } from '../check/registrarse-inicio/registrarse-inicio.component';
 
 
 @NgModule({
   declarations: [
-    MenuComponent
+    MenuComponent,
+    InicioComponent
+    
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
-    MenuComponent] 
+    MenuComponent,
+    InicioComponent,
+    ] 
 
 })
 export class NavegacionModule { }

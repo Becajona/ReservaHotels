@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Reservaciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Sistema de Gestión de Reservaciones</h1>
+        
+        <!-- Formulario de búsqueda -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Buscar Habitaciones</h4>
+            </div>
+            <div class="card-body">
+                <form id="searchForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="fechaInicio">Fecha de Llegada</label>
+                            <input type="date" class="form-control" id="fechaInicio" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="fechaFin">Fecha de Salida</label>
+                            <input type="date" class="form-control" id="fechaFin" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="tipoHabitacion">Tipo de Habitación</label>
+                            <select id="tipoHabitacion" class="form-control">
+                                <option value="">Seleccione...</option>
+                                <option value="individual">Individual</option>
+                                <option value="doble">Doble</option>
+                                <option value="suite">Suite</option>
+       
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="rangoPrecio">Rango de Precio</label>
+                            <input type="number" class="form-control" id="minPrecio" placeholder="Mínimo">
+                            <input type="number" class="form-control mt-2" id="maxPrecio" placeholder="Máximo">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Resultados de búsqueda -->
+        <div id="resultados" class="mt-4">
+            <h4>Habitaciones Disponibles</h4>
+            <div class="list-group" id="habitacionesList">
+                <!-- Aquí se mostrarán las habitaciones disponibles -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <!-- Formulario de Reservación -->
+<div id="reservacionForm" class="card mt-4" style="display: block;">
+    <div class="card-header">
+        <h4>Completar Reservación</h4>
+    </div>
+    <div class="card-body">
+        <form id="reservarHabitacionForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nombreCliente">Nombre</label>
+                    <input type="text" class="form-control" id="nombreCliente" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="correoCliente">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correoCliente" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="telefonoCliente">Teléfono</label>
+                <input type="tel" class="form-control" id="telefonoCliente" required>
+            </div>
+            <button type="submit" class="btn btn-success">Reservar</button>
+        </form>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+
+
+
+<!-- Panel de Usuario -->
+<div id="panelUsuario" class="mt-4">
+    <h4>Mis Reservas</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Habitación</th>
+                <th>Fecha de Llegada</th>
+                <th>Fecha de Salida</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="reservasList">
+            <!-- Aquí se mostrarán las reservas del usuario -->
+        </tbody>
+    </table>
+</div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

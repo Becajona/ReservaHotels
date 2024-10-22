@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Check-in y Check-out</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Sistema de Gestión de Check-in y Check-out</h1>
+        
+        <!-- Sección de Check-in -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Check-in</h4>
+            </div>
+            <div class="card-body">
+                <form id="checkInForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreHuesped">Nombre del Huésped</label>
+                            <input type="text" class="form-control" id="nombreHuesped" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="correoHuesped">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correoHuesped" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="fechaLlegada">Fecha de Llegada</label>
+                            <input type="date" class="form-control" id="fechaLlegada" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="tipoHabitacion">Tipo de Habitación</label>
+                            <select id="tipoHabitacion" class="form-control" required>
+                                <option value="">Seleccione...</option>
+                                <option value="individual">Individual</option>
+                                <option value="doble">Doble</option>
+                                <option value="suite">Suite</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar Check-in</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sección de Asignación de Habitaciones -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Asignación de Habitaciones</h4>
+            </div>
+            <div class="card-body">
+                <form id="asignacionHabitacionForm">
+                    <div class="form-group">
+                        <label for="asignarHabitacion">Seleccionar Habitación</label>
+                        <select id="asignarHabitacion" class="form-control" required>
+                            <option value="">Seleccione una habitación</option>
+                            <option value="101">Habitación 101 - Doble</option>
+                            <option value="102">Habitación 102 - Suite</option>
+                            <option value="103">Habitación 103 - Individual</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Asignar Habitación</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sección de Check-out -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Check-out</h4>
+            </div>
+            <div class="card-body">
+                <form id="checkOutForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreHuespedCheckOut">Nombre del Huésped</label>
+                            <input type="text" class="form-control" id="nombreHuespedCheckOut" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fechaSalida">Fecha de Salida</label>
+                            <input type="date" class="form-control" id="fechaSalida" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cargosAdicionales">Cargos Adicionales</label>
+                        <textarea class="form-control" id="cargosAdicionales" placeholder="Minibar, Lavandería, etc."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Registrar Check-out</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sección de Facturación -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Facturación</h4>
+            </div>
+            <div class="card-body">
+                <form id="facturacionForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreHuespedFactura">Nombre del Huésped</label>
+                            <input type="text" class="form-control" id="nombreHuespedFactura" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="totalFactura">Total a Pagar</label>
+                            <input type="number" class="form-control" id="totalFactura" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="metodoPago">Método de Pago</label>
+                        <select id="metodoPago" class="form-control" required>
+                            <option value="">Seleccione...</option>
+                            <option value="efectivo">Efectivo</option>
+                            <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-info">Generar Factura</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

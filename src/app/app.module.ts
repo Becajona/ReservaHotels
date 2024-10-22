@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NavegacionModule } from './navegacion/navegacion.module'; // Asegúrate de que la ruta sea correcta
+import { NavegacionModule } from './navegacion/navegacion.module'; 
+import { ReservacionesModule } from './reservaciones/reservaciones.module';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NavegacionModule
+    NavegacionModule,
+    ReservacionesModule,
+    
 
   ],
   providers: [],
