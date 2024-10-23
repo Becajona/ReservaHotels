@@ -7,45 +7,47 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+
     <div class="container mt-5">
         <h1 class="text-center">Sistema de Gestión de Check-in y Check-out</h1>
         
         <!-- Sección de Check-in -->
-        <div class="card mt-4">
-            <div class="card-header">
-                <h4>Check-in</h4>
-            </div>
-            <div class="card-body">
-                <form id="checkInForm">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreHuesped">Nombre del Huésped</label>
-                            <input type="text" class="form-control" id="nombreHuesped" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="correoHuesped">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="correoHuesped" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="fechaLlegada">Fecha de Llegada</label>
-                            <input type="date" class="form-control" id="fechaLlegada" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="tipoHabitacion">Tipo de Habitación</label>
-                            <select id="tipoHabitacion" class="form-control" required>
-                                <option value="">Seleccione...</option>
-                                <option value="individual">Individual</option>
-                                <option value="doble">Doble</option>
-                                <option value="suite">Suite</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Registrar Check-in</button>
-                </form>
-            </div>
+<div class="card mt-4">
+    <div class="card-header">
+      <h4>Check-in</h4>
+    </div>
+    <div class="card-body">
+      <form #checkInForm="ngForm" (ngSubmit)="onCheckInSubmit(checkInForm)">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="nombreHuesped">Nombre del Huésped</label>
+            <input type="text" class="form-control" id="nombreHuesped" name="nombreHuesped" [(ngModel)]="checkIn.nombreHuesped" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="correoHuesped">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correoHuesped" name="correoHuesped" [(ngModel)]="checkIn.correoHuesped" required>
+          </div>
         </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fechaLlegada">Fecha de Llegada</label>
+            <input type="date" class="form-control" id="fechaLlegada" name="fechaLlegada" [(ngModel)]="checkIn.fechaLlegada" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="tipoHabitacion">Tipo de Habitación</label>
+            <select id="tipoHabitacion" name="tipoHabitacion" class="form-control" [(ngModel)]="checkIn.tipoHabitacion" required>
+              <option value="">Seleccione...</option>
+              <option value="individual">Individual</option>
+              <option value="doble">Doble</option>
+              <option value="suite">Suite</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Check-in</button>
+      </form>
+    </div>
+  </div>
+  
 
         <!-- Sección de Asignación de Habitaciones -->
         <div class="card mt-4">

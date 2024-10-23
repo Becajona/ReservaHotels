@@ -49,6 +49,7 @@
             </div>
         </div>
 
+        
         <!-- Resultados de búsqueda -->
         <div id="resultados" class="mt-4">
             <h4>Habitaciones Disponibles</h4>
@@ -64,31 +65,35 @@
     <br>
     <br>
     <br>
+
+    
     <!-- Formulario de Reservación -->
-<div id="reservacionForm" class="card mt-4" style="display: block;">
+<div id="reservacionForm" class="card mt-4">
     <div class="card-header">
-        <h4>Completar Reservación</h4>
+      <h4>Completar Reservación</h4>
     </div>
     <div class="card-body">
-        <form id="reservarHabitacionForm">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="nombreCliente">Nombre</label>
-                    <input type="text" class="form-control" id="nombreCliente" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="correoCliente">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="correoCliente" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="telefonoCliente">Teléfono</label>
-                <input type="tel" class="form-control" id="telefonoCliente" required>
-            </div>
-            <button type="submit" class="btn btn-success">Reservar</button>
-        </form>
+      <form #reservarHabitacionForm="ngForm" (ngSubmit)="onSubmit(reservarHabitacionForm)">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="nombreCliente">Nombre</label>
+            <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" [(ngModel)]="reservacion.nombreCliente" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="correoCliente">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correoCliente" name="correoCliente" [(ngModel)]="reservacion.correoCliente" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="telefonoCliente">Teléfono</label>
+          <input type="tel" class="form-control" id="telefonoCliente" name="telefonoCliente" [(ngModel)]="reservacion.telefonoCliente" required>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!reservarHabitacionForm.valid">Reservar</button>
+      </form>
     </div>
-</div>
+  </div>
+
+  
 
 
 <br>
@@ -98,29 +103,35 @@
 <br>
 <br>
 <br>
-
 
 
 <!-- Panel de Usuario -->
 <div id="panelUsuario" class="mt-4">
     <h4>Mis Reservas</h4>
     <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Habitación</th>
-                <th>Fecha de Llegada</th>
-                <th>Fecha de Salida</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="reservasList">
-            <!-- Aquí se mostrarán las reservas del usuario -->
-        </tbody>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre Cliente</th>
+          <th>Correo Electrónico</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reserva of reservas">
+          <td>{{ reserva.id }}</td>
+          <td>{{ reserva.nombreCliente }}</td>
+          <td>{{ reserva.correoCliente }}</td>
+          <td>{{ reserva.telefonoCliente }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="eliminarReserva(reserva.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
-</div>
-
+  </div>
+  
 
 
 

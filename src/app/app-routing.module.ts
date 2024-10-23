@@ -8,6 +8,7 @@ import { InicioComponent } from './reservaciones/inicio/inicio.component';
 
 //check-in chech-out
 import { RegistrarseInicioComponent } from './check/registrarse-inicio/registrarse-inicio.component';
+import { ContaInicioComponent } from './contabilidad/conta-inicio/conta-inicio.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       path:'registrarse',
       component: RegistrarseInicioComponent
       },
+      {
+        path:'contabilidad',
+        component: ContaInicioComponent
+        },
 
 ];
 
