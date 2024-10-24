@@ -49,18 +49,103 @@
             </div>
         </div>
 
+
+
         
-        <!-- Resultados de búsqueda -->
-        <div id="resultados" class="mt-4">
-            <h4>Habitaciones Disponibles</h4>
-            <div class="list-group" id="habitacionesList">
-                <!-- Aquí se mostrarán las habitaciones disponibles -->
-            </div>
-        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <form #habitacionForm="ngForm" (ngSubmit)="onSubmitHabitacionForm(habitacionForm)">
+          <div>
+            <label for="numero_habitacion">Número de Habitación:</label>
+            <input type="text" id="numero_habitacion" name="numero_habitacion" [(ngModel)]="habitacion.numero_habitacion" required>
+          </div>
+          <div>
+            <label for="tipo_habitacion">Tipo de Habitación:</label>
+            <input type="text" id="tipo_habitacion" name="tipo_habitacion" [(ngModel)]="habitacion.tipo_habitacion" required>
+          </div>
+          <div>
+            <label for="precio_noche">Precio por Noche:</label>
+            <input type="number" id="precio_noche" name="precio_noche" [(ngModel)]="habitacion.precio_noche" required>
+          </div>
+          <div>
+            <label for="capacidad">Capacidad:</label>
+            <input type="number" id="capacidad" name="capacidad" [(ngModel)]="habitacion.capacidad" required>
+          </div>
+          <div>
+            <label for="sucursal_id">ID de Sucursal:</label>
+            <input type="text" id="sucursal_id" name="sucursal_id" [(ngModel)]="habitacion.sucursal_id" required>
+          </div>
+          <div>
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" [(ngModel)]="habitacion.estado" required>
+              <option value="disponible">Disponible</option>
+              <option value="reservada">Reservada</option>
+              <option value="en limpieza">En Limpieza</option>
+            </select>
+          </div>
+          <div>
+            <label for="fecha_disponible">Fecha Disponible:</label>
+            <input type="datetime-local" id="fecha_disponible" name="fecha_disponible" [(ngModel)]="habitacion.fecha_disponible" required>
+          </div>
+          <div>
+            <label for="comodidades">Comodidades (separadas por coma):</label>
+            <input type="text" id="comodidades" name="comodidades" [(ngModel)]="habitacion.comodidades">
+          </div>
+          
+          <button type="submit">Agregar Habitación</button>
+        </form>
+        
+        <div id="mensaje"></div>
+        
+
+        <br>
+        <br>
+        
+        <!-- Mostrar las habitaciones disponibles -->
+         <!-- habitaciones.component.html -->
+<h2>Habitaciones Disponibles</h2>
+<div *ngIf="habitacionesDisponibles.length > 0; else noHabitaciones">
+  <div *ngFor="let habitacion of habitacionesDisponibles">
+    <h3>Número de Habitación: {{ habitacion.numero_habitacion }}</h3>
+    <p>Tipo de Habitación: {{ habitacion.tipo_habitacion }}</p>
+    <p>Precio por Noche: {{ habitacion.precio_noche }}</p>
+    <p>Capacidad: {{ habitacion.capacidad }}</p>
+    <p>ID de Sucursal: {{ habitacion.sucursal_id }}</p>
+    <p>Estado: {{ habitacion.estado }}</p>
+    <p>Fecha Disponible: {{ habitacion.fecha_disponible | date:'short' }}</p>
+    <p>Comodidades: {{ habitacion.comodidades }}</p>
+
+  </div>
+</div>
+<ng-template #noHabitaciones>
+  <p>No hay habitaciones disponibles en este momento.</p>
+</ng-template>
+
+
+
+
+<br>
+<br>
+<br>
+
+
+        <br>
+        
+
+        <br>
+
+
+
+        
     </div>
 
 
-<h1>Hoola</h1>
 
     <br>
     <br>
@@ -73,7 +158,8 @@
       <h4>Completar Reservación</h4>
     </div>
     <div class="card-body">
-      <form #reservarHabitacionForm="ngForm" (ngSubmit)="onSubmit(reservarHabitacionForm)">
+
+      <form #reservarHabitacionForm="ngForm" (ngSubmit)="onSubmitReservacionForm(reservarHabitacionForm)">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="nombreCliente">Nombre</label>
@@ -93,12 +179,11 @@
     </div>
   </div>
 
-  
 
 
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
 
 <br>
 <br>
