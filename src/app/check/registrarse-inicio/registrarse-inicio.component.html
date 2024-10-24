@@ -7,81 +7,149 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container mt-5">
+        <h1 class="text-center">Sistema de Gestión de Check-in y Check-out</h1>
+        <form #checkInForm="ngForm" (ngSubmit)="onCheckInSubmit(checkInForm)" class="p-4 border rounded shadow">
+            <h2 class="mb-4">Registro de Check-In</h2>
+            
+            <div class="mb-3">
+              <input type="text" name="nombreHuesped" [(ngModel)]="checkIn.nombreHuesped" required class="form-control" placeholder="Nombre del huésped">
+            </div>
+            
+            <div class="mb-3">
+              <input type="email" name="correoHuesped" [(ngModel)]="checkIn.correoHuesped" required class="form-control" placeholder="Correo del huésped">
+            </div>
+          
+            <div class="mb-3">
+              <input type="date" name="fechaLlegada" [(ngModel)]="checkIn.fechaLlegada" required class="form-control" placeholder="Fecha de llegada">
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="tipoHabitacion" [(ngModel)]="checkIn.tipoHabitacion" required class="form-control" placeholder="Tipo de habitación">
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="telefono" [(ngModel)]="checkIn.telefono" required class="form-control" placeholder="Teléfono">
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="direccion" [(ngModel)]="checkIn.direccion" required class="form-control" placeholder="Dirección">
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="documento" [(ngModel)]="checkIn.documento" required class="form-control" placeholder="Documento">
+            </div>
+          
+            <div class="mb-3">
+              <input type="date" name="fechaNacimiento" [(ngModel)]="checkIn.fechaNacimiento" required class="form-control" placeholder="Fecha de nacimiento">
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="nacionalidad" [(ngModel)]="checkIn.nacionalidad" required class="form-control" placeholder="Nacionalidad">
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="emergencia" [(ngModel)]="checkIn.emergencia" required class="form-control" placeholder="Contacto de emergencia">
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="numeroReserva" [(ngModel)]="checkIn.numeroReserva" required class="form-control" placeholder="Número de reserva">
+            </div>
+          
+            <div class="mb-3">
+              <input type="date" name="fechaSalida" [(ngModel)]="checkIn.fechaSalida" required class="form-control" placeholder="Fecha de salida">
+            </div>
+          
+            <div class="mb-3">
+              <input type="number" name="numPersonas" [(ngModel)]="checkIn.numPersonas" required class="form-control" placeholder="Número de personas">
+            </div>
+          
+            <div class="mb-3">
+              <input type="time" name="horaLlegada" [(ngModel)]="checkIn.horaLlegada" required class="form-control" placeholder="Hora de llegada">
+            </div>
+          
+            <div class="mb-3">
+              <select name="metodoCheckin" [(ngModel)]="checkIn.metodoCheckin" required class="form-select">
+                <option value="">Selecciona método de check-in</option>
+                <option value="en persona">En persona</option>
+                <option value="online">Online</option>
+              </select>
+            </div>
+          
+            <div class="mb-3">
+              <select name="metodoPago" [(ngModel)]="checkIn.metodoPago" required class="form-select">
+                <option value="">Selecciona método de pago</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="efectivo">Efectivo</option>
+              </select>
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="datosTarjeta" [(ngModel)]="checkIn.datosTarjeta" class="form-control" placeholder="Datos de tarjeta (opcional)">
+            </div>
+          
+            <div class="mb-3">
+              <input type="text" name="confirmacionPago" [(ngModel)]="checkIn.confirmacionPago" required class="form-control" placeholder="Confirmación de pago">
+            </div>
+          
+            <button type="submit" class="btn btn-primary">Registrar Check-In</button>
+          </form>
 
-<div class="container mt-5">
-    <h1 class="text-center">Sistema de Gestión de Check-in y Check-out</h1>
-    
-    <!-- Sección de Check-in -->
-    <div class="mt-4">
-        <h2>Check-In</h2>
-        <form #checkInForm="ngForm" (ngSubmit)="onCheckInSubmit(checkInForm)">
-            <div class="form-group">
-                <input [(ngModel)]="checkIn.nombreHuesped" name="nombreHuesped" class="form-control" placeholder="Nombre del Huésped" required />
-            </div>
-            <div class="form-group">
-                <input [(ngModel)]="checkIn.correoHuesped" name="correoHuesped" class="form-control" placeholder="Correo del Huésped" required />
-            </div>
-            <div class="form-group">
-                <input [(ngModel)]="checkIn.fechaLlegada" name="fechaLlegada" class="form-control" placeholder="Fecha de Llegada" required type="date"/>
-            </div>
-            <div class="form-group">
-                <input [(ngModel)]="checkIn.tipoHabitacion" name="tipoHabitacion" class="form-control" placeholder="Tipo de Habitación" required />
-            </div>
-            <button type="submit" class="btn btn-primary">Realizar Check-In</button>
-        </form>
-    </div>
-    
-    <!-- Sección de Check-out -->
-    <div class="mt-4">
-        <h2>Check-Out</h2>
-        <form #checkOutForm="ngForm" (ngSubmit)="onCheckOutSubmit(checkOutForm)">
-            <div class="form-group">
-                <input [(ngModel)]="checkOut.nombreHuesped" name="nombreHuesped" class="form-control" placeholder="Nombre del Huésped" required />
-            </div>
-            <div class="form-group">
-                <input [(ngModel)]="checkOut.fechaSalida" name="fechaSalida" class="form-control" placeholder="Fecha de Salida" required type="date"/>
-            </div>
-            <div class="form-group">
-                <input [(ngModel)]="checkOut.cargosAdicionales" name="cargosAdicionales" class="form-control" placeholder="Cargos Adicionales" />
-            </div>
-            <button type="submit" class="btn btn-danger">Realizar Check-Out</button>
-        </form>
-    </div>
-    
-    <!-- Sección de Facturación -->
-    <div class="mt-4">
-        <h2>Facturación</h2>
-        <form #facturacionForm="ngForm" (ngSubmit)="onFacturacionSubmit(facturacionForm)">
-            <div class="form-group">
-                <input [(ngModel)]="facturacion.nombreHuespedFactura" name="nombreHuespedFactura" class="form-control" placeholder="Nombre del Huésped" required />
-            </div>
-            <div class="form-group">
-                <input [(ngModel)]="facturacion.totalFactura" name="totalFactura" class="form-control" placeholder="Total a Pagar" required type="number" />
-            </div>
-            <div class="form-group">
-                <select [(ngModel)]="facturacion.metodoPago" name="metodoPago" class="form-control" required>
-                    <option value="">Selecciona Método de Pago</option>
-                    <option value="tarjeta">Tarjeta</option>
-                    <option value="efectivo">Efectivo</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-info">Generar Factura</button>
-        </form>
-    </div>
-    
-    <!-- Sección de Huéspedes Registrados -->
-    <div class="mt-4">
-        <h2>Huéspedes Registrados</h2>
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let huesped of huespedes">
-                {{ huesped.nombreHuesped }} - {{ huesped.fechaLlegada }} - {{ huesped.tipoHabitacion }}
-            </li>
-        </ul>
-    </div>
-</div>
+          
+        <!-- Sección de Facturación -->
+        <div class="mt-4">
+            <h2>Facturación</h2>
+            <form #facturacionForm="ngForm" (ngSubmit)="onFacturacionSubmit(facturacionForm)">
+                <h3>Detalles de Facturación</h3>
+                <div class="form-group">
+                    <label for="nombreHuespedFactura">Nombre del huésped:</label>
+                    <input type="text" id="nombreHuespedFactura" name="nombreHuespedFactura" [(ngModel)]="facturacion.nombreHuespedFactura" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="totalFactura">Total a pagar:</label>
+                    <input type="number" id="totalFactura" name="totalFactura" [(ngModel)]="facturacion.totalFactura" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="metodoPagoFactura">Método de pago:</label>
+                    <input type="text" id="metodoPagoFactura" name="metodoPago" [(ngModel)]="facturacion.metodoPago" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Generar Factura</button>
+            </form>
+        </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Sección de Check-out -->
+        <div class="mt-4">
+            <h2>Registro de Salida</h2>
+            <form #checkOutForm="ngForm" (ngSubmit)="onCheckOutSubmit(checkOutForm)">
+                <h3>Información de Salida</h3>
+                <div class="form-group">
+                    <label for="nombreHuespedCheckOut">Nombre del huésped:</label>
+                    <input type="text" id="nombreHuespedCheckOut" name="nombreHuespedCheckOut" ngModel required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="fechaSalidaCheckOut">Fecha de salida:</label>
+                    <input type="date" id="fechaSalidaCheckOut" name="fechaSalidaCheckOut" ngModel required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="cargosAdicionales">Cargos adicionales:</label>
+                    <input type="text" id="cargosAdicionales" name="cargosAdicionales" ngModel class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar Check-out</button>
+            </form>
+        </div>
+
+        <!-- Sección de Huéspedes -->
+        <div class="mt-4">
+            <h2>Lista de Huéspedes Registrados</h2>
+            <ul class="list-group">
+                <li *ngFor="let huesped of huespedes" class="list-group-item">
+                    {{ huesped.nombreHuesped }} - {{ huesped.fechaLlegada }} (Check-in)
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

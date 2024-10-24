@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; // Firestore de Firebase
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NgForm } from '@angular/forms';
 import { HabitacionesService } from 'src/app/servicios/habitaciones.service';
 
-// Definición de la estructura de datos de una reserva
 export interface Reserva {
-  id: string; // Opcional para poder usarlo en Firestore
+  id: string;
   nombreCliente: string;
   correoCliente: string;
   telefonoCliente: string;
-  habitacion?: string; // Si necesitas este campo
-  fechaLlegada?: Date; // Si necesitas este campo
-  fechaSalida?: Date; // Si necesitas este campo
-  estado?: string; // Si necesitas este campo
+  habitacion?: string;
+  fechaLlegada?: Date;
+  fechaSalida?: Date;
+  estado?: string;
 }
 
-// Definición de la estructura de datos de una habitación
 export interface Habitacion {
   numero_habitacion: string;
   tipo_habitacion: string;
@@ -24,9 +22,8 @@ export interface Habitacion {
   sucursal_id: string;
   estado: string;
   fecha_disponible: Date;
-  comodidades?: string; // Asegúrate de que sea string
+  comodidades?: string;
 }
-
 
 @Component({
   selector: 'app-inicio',
@@ -34,7 +31,7 @@ export interface Habitacion {
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
-  reservacion: { // Para el formulario de reserva de habitaciones
+  reservacion: {
     nombreCliente: string;
     correoCliente: string;
     telefonoCliente: string;
@@ -44,7 +41,7 @@ export class InicioComponent implements OnInit {
     telefonoCliente: ''
   };
 
-  habitacion: { // Para el formulario de nueva habitación
+  habitacion: {
     numero_habitacion: string;
     tipo_habitacion: string;
     precio_noche: number;
@@ -52,7 +49,7 @@ export class InicioComponent implements OnInit {
     sucursal_id: string;
     estado: string;
     fecha_disponible: Date;
-    comodidades: string; // Cambiado a string
+    comodidades: string;
   } = {
     numero_habitacion: '',
     tipo_habitacion: '',
@@ -61,11 +58,15 @@ export class InicioComponent implements OnInit {
     sucursal_id: '',
     estado: 'disponible',
     fecha_disponible: new Date(),
-    comodidades: '' 
+    comodidades: ''
   };
 
   reservas: Reserva[] = [];
   habitacionesDisponibles: any[] = [];
+  habitacionesFiltradas: Habitacion[] = []; // Inicializa la propiedad habitacionesFiltradas
+  fechaEntrada: Date = new Date();
+  fechaSalida: Date = new Date();
+  capacidad: number = 0;
 
   constructor(private firestore: AngularFirestore, private habitacionService: HabitacionesService) { }
 
@@ -80,20 +81,28 @@ export class InicioComponent implements OnInit {
     });
   }
 
-
-// Método para cargar las habitaciones desde Firestore
   cargarHabitacionesDisponibles(): void {
-    this.firestore.collection('habitaciones', ref => ref.where('estado', '==', 'disponible')).valueChanges().subscribe(data => {
-      this.habitacionesDisponibles = data;
-      console.log(this.habitacionesDisponibles); // Para depurar y ver los datos
+    this.firestore.collection<Habitacion>('habitaciones', ref => ref.where('estado', '==', 'disponible')).valueChanges().subscribe(data => {
+        this.habitacionesDisponibles = data;
+        this.habitacionesFiltradas = data; // Ahora TypeScript sabe que es Habitacion[]
+        console.log(this.habitacionesDisponibles);
+    });
+}
+
+
+  buscarHabitaciones(): void {
+    // Filtra habitaciones basándose en los criterios de búsqueda
+    this.habitacionesFiltradas = this.habitacionesDisponibles.filter(habitacion => {
+      const cumpleFechaEntrada = new Date(habitacion.fecha_disponible) <= this.fechaEntrada;
+      const cumpleFechaSalida = new Date(habitacion.fecha_disponible) >= this.fechaSalida;
+      const cumpleCapacidad = habitacion.capacidad >= this.capacidad;
+
+      return cumpleFechaEntrada && cumpleFechaSalida && cumpleCapacidad;
     });
   }
 
-
-  // Método para enviar el formulario de reservación
   onSubmitReservacionForm(form: NgForm) {
     if (form.valid) {
-      // Lógica para manejar el envío del formulario de reservación
       this.firestore.collection('reservaciones').add({
         nombreCliente: this.reservacion.nombreCliente,
         correoCliente: this.reservacion.correoCliente,
@@ -101,23 +110,18 @@ export class InicioComponent implements OnInit {
         timestamp: new Date()
       }).then(() => {
         alert('Reservación completada con éxito.');
-        form.resetForm(); // Resetea el formulario tras el envío exitoso
-        this.cargarReservas(); // Recarga las reservas
+        form.resetForm();
+        this.cargarReservas();
       }).catch(error => {
         console.error("Error al completar la reservación: ", error);
       });
     }
   }
 
-  
-  // Método para enviar el formulario de habitación
-  
-  // Método para enviar el formulario de habitación
   onSubmitHabitacionForm(form: NgForm) {
     if (form.valid) {
-      // No es necesario convertir comodidades, ya que ahora es un string
       const comodidadesString = this.habitacion.comodidades || '';
-      
+
       this.firestore.collection('habitaciones').add({
         numero_habitacion: this.habitacion.numero_habitacion,
         tipo_habitacion: this.habitacion.tipo_habitacion,
@@ -126,17 +130,16 @@ export class InicioComponent implements OnInit {
         sucursal_id: this.habitacion.sucursal_id,
         estado: this.habitacion.estado,
         fecha_disponible: this.habitacion.fecha_disponible,
-        comodidades: comodidadesString // Guardar como string
+        comodidades: comodidadesString
       }).then(() => {
         alert('Habitación agregada con éxito.');
         form.resetForm();
-        this.cargarHabitacionesDisponibles(); // Recargar las habitaciones disponibles
+        this.cargarHabitacionesDisponibles();
       }).catch(error => {
         console.error("Error al agregar la habitación: ", error);
       });
     }
   }
-  
 
   eliminarReserva(id: string) {
     this.firestore.collection('reservaciones').doc(id).delete().then(() => {
