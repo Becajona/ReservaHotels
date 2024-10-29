@@ -36,7 +36,7 @@ export class ContaInicioComponent implements OnInit {
   }
 
   // Método para registrar una transacción
-  registrarTransaccion(form: NgForm): void { // Cambiar a NgForm
+  registrarTransaccion(form: NgForm): void {
     if (form.valid) {
       this.firestore.collection('transacciones').add(this.transaccion).then(() => {
         console.log('Transacción registrada:', this.transaccion);

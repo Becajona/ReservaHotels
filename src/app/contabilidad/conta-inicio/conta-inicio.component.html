@@ -76,12 +76,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aquí se llenarán las filas dinámicamente -->
+                    <tr *ngFor="let transaccion of transacciones">
+                        <td>{{ transaccion.fecha }}</td>
+                        <td>{{ transaccion.tipo }}</td>
+                        <td>{{ transaccion.monto }}</td>
+                        <td>{{ transaccion.descripcion }}</td>
+                        <td>{{ transaccion.sucursal }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
     
+
 </div>
 
 
