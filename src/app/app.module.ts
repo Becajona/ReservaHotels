@@ -11,11 +11,13 @@ import { environment } from 'src/environments/environment.prod';
 import { RegistrarseInicioComponent } from './check/registrarse-inicio/registrarse-inicio.component';
 import { NavegacionModule } from './navegacion/navegacion.module'; 
 import { ReservacionesModule } from './reservaciones/reservaciones.module'; 
+import { ContaInicioComponent } from './contabilidad/conta-inicio/conta-inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrarseInicioComponent
+    RegistrarseInicioComponent,
+    ContaInicioComponent
     
   ],
   imports: [
@@ -26,6 +28,7 @@ import { ReservacionesModule } from './reservaciones/reservaciones.module';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    
     
     
 

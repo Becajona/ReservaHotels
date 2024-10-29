@@ -16,80 +16,73 @@
 
 
 
-
-
-        <!-- Sección de Registro de Transacciones -->
-        <div class="card mt-4">
-            <div class="card-header">
-                <h4>Registro de Transacciones</h4>
-            </div>
-            <div class="card-body">
-                <form id="transaccionForm">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="tipoTransaccion">Tipo de Transacción</label>
-                            <select id="tipoTransaccion" class="form-control" required>
-                                <option value="">Seleccione...</option>
-                                <option value="ingreso">Ingreso</option>
-                                <option value="gasto">Gasto</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="fechaTransaccion">Fecha de la Transacción</label>
-                            <input type="date" class="form-control" id="fechaTransaccion" required>
-                        </div>
-                        
-                        <div class="form-group col-md-6">
-                            <label for="montoTransaccion">Monto</label>
-                            <input type="number" class="form-control" id="montoTransaccion" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="sucursal">Sucursal</label>
-                            <select id="sucursal" class="form-control" required>
-                                <option value="">Seleccione Sucursal...</option>
-                                <option value="sucursal1">Sucursal 1</option>
-                                <option value="sucursal2">Sucursal 2</option>
-                                <!-- Agregar más opciones según las sucursales disponibles -->
-                            </select>
-                        </div>
-                        
-
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcionTransaccion">Descripción</label>
-                        <textarea class="form-control" id="descripcionTransaccion" rows="3" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">Registrar Transacción</button>
-
-                    <button type="button" class="btn btn-secondary" onclick="exportarPDF()">Exportar PDF</button>
-                    <button type="button" class="btn btn-secondary" onclick="exportarExcel()">Exportar Excel</button>
-
-                </form>
-            </div>
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h4>Historial de Transacciones</h4>
+<!-- Sección de Registro de Transacciones -->
+<div class="card mt-4">
+    <div class="card-header">
+        <h4>Registro de Transacciones</h4>
+    </div>
+    <div class="card-body">
+        <form #transaccionForm="ngForm" (ngSubmit)="registrarTransaccion(transaccionForm)">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="tipoTransaccion">Tipo de Transacción</label>
+                    <select id="tipoTransaccion" class="form-control" required [(ngModel)]="transaccion.tipo" name="tipoTransaccion">
+                        <option value="">Seleccione...</option>
+                        <option value="ingreso">Ingreso</option>
+                        <option value="gasto">Gasto</option>
+                    </select>
                 </div>
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Tipo</th>
-                                <th>Monto</th>
-                                <th>Descripción</th>
-                                <th>Sucursal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Aquí se llenarán las filas dinámicamente -->
-                        </tbody>
-                    </table>
+                <div class="form-group col-md-6">
+                    <label for="fechaTransaccion">Fecha de la Transacción</label>
+                    <input type="date" class="form-control" required [(ngModel)]="transaccion.fecha" name="fechaTransaccion">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="montoTransaccion">Monto</label>
+                    <input type="number" class="form-control" required [(ngModel)]="transaccion.monto" name="montoTransaccion">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="sucursal">Sucursal</label>
+                    <select id="sucursal" class="form-control" required [(ngModel)]="transaccion.sucursal" name="sucursal">
+                        <option value="">Seleccione Sucursal...</option>
+                        <option value="sucursal1">Sucursal 1</option>
+                        <option value="sucursal2">Sucursal 2</option>
+                        <!-- Agregar más opciones según las sucursales disponibles -->
+                    </select>
                 </div>
             </div>
-            
+            <div class="form-group">
+                <label for="descripcionTransaccion">Descripción</label>
+                <textarea class="form-control" rows="3" required [(ngModel)]="transaccion.descripcion" name="descripcionTransaccion"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar Transacción</button>
+            <button type="button" class="btn btn-secondary" onclick="exportarPDF()">Exportar PDF</button>
+            <button type="button" class="btn btn-secondary" onclick="exportarExcel()">Exportar Excel</button>
+        </form>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Historial de Transacciones</h4>
         </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Monto</th>
+                        <th>Descripción</th>
+                        <th>Sucursal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se llenarán las filas dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
 
 
         
