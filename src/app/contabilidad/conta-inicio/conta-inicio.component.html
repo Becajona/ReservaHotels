@@ -61,8 +61,12 @@
     </div>
 
     <div class="card mt-4">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h4>Historial de Transacciones</h4>
+            <div>
+                <button class="btn btn-primary mr-2" (click)="exportarPDF()">Exportar PDF</button>
+                <button class="btn btn-success" (click)="exportarExcel()">Exportar Excel</button>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -97,31 +101,31 @@
         <br>
         <br>
         <!-- Sección de Generación de Reportes -->
-        <div class="card mt-4">
-            <div class="card-header">
-                <h4>Generación de Reportes Financieros</h4>
+<div class="card mt-4">
+    <div class="card-header">
+        <h4>Generación de Reportes Financieros</h4>
+    </div>
+    <div class="card-body">
+        <form (ngSubmit)="generarReporte()">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="tipoReporte">Tipo de Reporte</label>
+                    <select id="tipoReporte" class="form-control" [(ngModel)]="tipoReporte" name="tipoReporte" required>
+                        <option value="">Seleccione...</option>
+                        <option value="mensual">Mensual</option>
+                        <option value="trimestral">Trimestral</option>
+                        <option value="anual">Anual</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="periodoReporte">Periodo</label>
+                    <input type="month" class="form-control" id="periodoReporte" [(ngModel)]="periodoReporte" name="periodoReporte" required>
+                </div>
             </div>
-            <div class="card-body">
-                <form id="reporteForm">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="tipoReporte">Tipo de Reporte</label>
-                            <select id="tipoReporte" class="form-control" required>
-                                <option value="">Seleccione...</option>
-                                <option value="mensual">Mensual</option>
-                                <option value="trimestral">Trimestral</option>
-                                <option value="anual">Anual</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="periodoReporte">Periodo</label>
-                            <input type="month" class="form-control" id="periodoReporte" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Generar Reporte</button>
-                </form>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-success">Generar Reporte</button>
+        </form>
+    </div>
+</div>
 
         
         <br>
