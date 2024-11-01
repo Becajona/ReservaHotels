@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { NgForm } from '@angular/forms'; // Importa NgForm aquí
+import { NgForm } from '@angular/forms';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 
@@ -13,7 +13,7 @@ export class ContaInicioComponent implements OnInit {
   transacciones: any[] = []; // Para almacenar transacciones
   tipoReporte: string = '';    // Tipo de reporte seleccionado
   periodoReporte: string = ''; // Periodo seleccionado para el reporte
-
+  formatoExportacion: string = ''; // Agregar la propiedad formatoExportacion
 
   // Modelo para una transacción
   transaccion = {
@@ -39,8 +39,7 @@ export class ContaInicioComponent implements OnInit {
     });
   }
 
-
- //GENERAR REPORTE de la parte de codigo de Generación de Reportes Financieros
+  // Generar reporte
   generarReporte(): void {
     if (this.tipoReporte && this.periodoReporte) {
       const doc = new jsPDF();
@@ -64,7 +63,7 @@ export class ContaInicioComponent implements OnInit {
       doc.setFontSize(10);
       doc.setFont("helvetica", "bold");
       headers.forEach((header, index) => {
-          doc.text(header, 10 + index * 40, startY);
+        doc.text(header, 10 + index * 40, startY);
       });
 
       // Datos de las transacciones
@@ -86,7 +85,6 @@ export class ContaInicioComponent implements OnInit {
     }
   }
 
-
   // Método para registrar una transacción
   registrarTransaccion(form: NgForm): void {
     if (form.valid) {
@@ -105,22 +103,22 @@ export class ContaInicioComponent implements OnInit {
   exportarPDF(): void {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.width;
-    
+
     // Título
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
     doc.text("Historial de Transacciones", pageWidth / 2, 15, { align: "center" });
-    
+
     // Subtítulo
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
     doc.text("Reporte de todas las transacciones registradas", pageWidth / 2, 23, { align: "center" });
-    
+
     // Encabezados de la tabla
     const headers = ["Fecha", "Tipo", "Monto", "Descripción", "Sucursal"];
     let startY = 30;
     let rowHeight = 8;
-    
+
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
     headers.forEach((header, index) => {
@@ -131,7 +129,7 @@ export class ContaInicioComponent implements OnInit {
     doc.setFont("helvetica", "normal");
     this.transacciones.forEach((transaccion, index) => {
         const rowY = startY + (index + 1) * rowHeight;
-        
+
         doc.text(transaccion.fecha, 10, rowY);
         doc.text(transaccion.tipo, 50, rowY);
         doc.text(`$${transaccion.monto}`, 90, rowY);
@@ -141,28 +139,19 @@ export class ContaInicioComponent implements OnInit {
 
     // Opciones de guardado
     doc.save("transacciones.pdf");
-}
+  }
 
+  // Exportar a Excel
+  exportarExcel(): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.transacciones);
+    const workbook: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Transacciones');
+    XLSX.writeFile(workbook, 'transacciones.xlsx');
+  }
 
-
-
-// Exportar a Excel
-exportarExcel(): void {
-  // Preparamos los datos para exportación
-  const datosParaExportar = this.transacciones.map(transaccion => ({
-    Fecha: transaccion.fecha,
-    Tipo: transaccion.tipo,
-    Monto: transaccion.monto,
-    Descripción: transaccion.descripcion,
-    Sucursal: transaccion.sucursal
-  }));
-
-  // Creamos un libro de trabajo y una hoja
-  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datosParaExportar);
-  const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Transacciones');
-
-  // Generamos el archivo y lo descargamos
-  XLSX.writeFile(wb, 'transacciones.xlsx');
-}
+  // Método para exportar informe
+  exportarInforme(): void {
+    // Implementar la lógica para exportar el informe según el formato seleccionado
+    console.log(`Exportando informe en formato: ${this.formatoExportacion}`);
+  }
 }

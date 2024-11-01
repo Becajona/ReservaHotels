@@ -1,181 +1,133 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Contabilidad</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+<div class="container mt-5">
+    <h1 class="text-center">Sistema de Contabilidad</h1>
 
-
-
-    <div class="container mt-5">
-        <h1 class="text-center">Sistema de Contabilidad</h1>
-
-
-
-
-<!-- Sección de Registro de Transacciones -->
-<div class="card mt-4">
-    <div class="card-header">
-        <h4>Registro de Transacciones</h4>
-    </div>
-    <div class="card-body">
-        <form #transaccionForm="ngForm" (ngSubmit)="registrarTransaccion(transaccionForm)">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="tipoTransaccion">Tipo de Transacción</label>
-                    <select id="tipoTransaccion" class="form-control" required [(ngModel)]="transaccion.tipo" name="tipoTransaccion">
-                        <option value="">Seleccione...</option>
-                        <option value="ingreso">Ingreso</option>
-                        <option value="gasto">Gasto</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="fechaTransaccion">Fecha de la Transacción</label>
-                    <input type="date" class="form-control" required [(ngModel)]="transaccion.fecha" name="fechaTransaccion">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="montoTransaccion">Monto</label>
-                    <input type="number" class="form-control" required [(ngModel)]="transaccion.monto" name="montoTransaccion">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="sucursal">Sucursal</label>
-                    <select id="sucursal" class="form-control" required [(ngModel)]="transaccion.sucursal" name="sucursal">
-                        <option value="">Seleccione Sucursal...</option>
-                        <option value="sucursal1">Sucursal 1</option>
-                        <option value="sucursal2">Sucursal 2</option>
-                        <!-- Agregar más opciones según las sucursales disponibles -->
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="descripcionTransaccion">Descripción</label>
-                <textarea class="form-control" rows="3" required [(ngModel)]="transaccion.descripcion" name="descripcionTransaccion"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Registrar Transacción</button>
-            <button type="button" class="btn btn-secondary" onclick="exportarPDF()">Exportar PDF</button>
-            <button type="button" class="btn btn-secondary" onclick="exportarExcel()">Exportar Excel</button>
-        </form>
-    </div>
-
+    <!-- Sección de Registro de Transacciones -->
     <div class="card mt-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h4>Historial de Transacciones</h4>
-            <div>
-                <button class="btn btn-primary mr-2" (click)="exportarPDF()">Exportar PDF</button>
-                <button class="btn btn-success" (click)="exportarExcel()">Exportar Excel</button>
-            </div>
+        <div class="card-header">
+            <h4>Registro de Transacciones</h4>
         </div>
         <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Tipo</th>
-                        <th>Monto</th>
-                        <th>Descripción</th>
-                        <th>Sucursal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let transaccion of transacciones">
-                        <td>{{ transaccion.fecha }}</td>
-                        <td>{{ transaccion.tipo }}</td>
-                        <td>{{ transaccion.monto }}</td>
-                        <td>{{ transaccion.descripcion }}</td>
-                        <td>{{ transaccion.sucursal }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
-
-</div>
-
-
-        
-        <br>
-        <br>
-        <br>
-        <!-- Sección de Generación de Reportes -->
-<div class="card mt-4">
-    <div class="card-header">
-        <h4>Generación de Reportes Financieros</h4>
-    </div>
-    <div class="card-body">
-        <form (ngSubmit)="generarReporte()">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="tipoReporte">Tipo de Reporte</label>
-                    <select id="tipoReporte" class="form-control" [(ngModel)]="tipoReporte" name="tipoReporte" required>
-                        <option value="">Seleccione...</option>
-                        <option value="mensual">Mensual</option>
-                        <option value="trimestral">Trimestral</option>
-                        <option value="anual">Anual</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="periodoReporte">Periodo</label>
-                    <input type="month" class="form-control" id="periodoReporte" [(ngModel)]="periodoReporte" name="periodoReporte" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-success">Generar Reporte</button>
-        </form>
-    </div>
-</div>
-
-        
-        <br>
-        <br>
-        <br>
-
-        <!-- Sección de Exportación de Informes -->
-        <div class="card mt-4">
-            <div class="card-header">
-                <h4>Exportar Informes</h4>
-            </div>
-            <div class="card-body">
-                <form id="exportarForm">
-                    <div class="form-group">
-                        <label for="formatoExportacion">Formato de Exportación</label>
-                        <select id="formatoExportacion" class="form-control" required>
+            <form #transaccionForm="ngForm" (ngSubmit)="registrarTransaccion(transaccionForm)">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="tipoTransaccion">Tipo de Transacción</label>
+                        <select id="tipoTransaccion" class="form-control" required [(ngModel)]="transaccion.tipo" name="tipoTransaccion">
                             <option value="">Seleccione...</option>
-                            <option value="pdf">PDF</option>
-                            <option value="excel">Excel</option>
+                            <option value="ingreso">Ingreso</option>
+                            <option value="gasto">Gasto</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-info">Exportar Informe</button>
-                </form>
+                    <div class="form-group col-md-6">
+                        <label for="fechaTransaccion">Fecha de la Transacción</label>
+                        <input type="date" class="form-control" required [(ngModel)]="transaccion.fecha" name="fechaTransaccion">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="montoTransaccion">Monto</label>
+                        <input type="number" class="form-control" required [(ngModel)]="transaccion.monto" name="montoTransaccion">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="sucursal">Sucursal</label>
+                        <select id="sucursal" class="form-control" required [(ngModel)]="transaccion.sucursal" name="sucursal">
+                            <option value="">Seleccione Sucursal...</option>
+                            <option value="sucursal1">Sucursal 1</option>
+                            <option value="sucursal2">Sucursal 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcionTransaccion">Descripción</label>
+                    <textarea class="form-control" rows="3" required [(ngModel)]="transaccion.descripcion" name="descripcionTransaccion"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar Transacción</button>
+                <button type="button" class="btn btn-secondary" onclick="exportarPDF()">Exportar PDF</button>
+                <button type="button" class="btn btn-secondary" onclick="exportarExcel()">Exportar Excel</button>
+            </form>
+        </div>
+        <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4>Historial de Transacciones</h4>
+                <div>
+                    <button class="btn btn-primary mr-2" (click)="exportarPDF()">Exportar PDF</button>
+                    <button class="btn btn-success" (click)="exportarExcel()">Exportar Excel</button>
+                </div>
             </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Monto</th>
+                            <th>Descripción</th>
+                            <th>Sucursal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transaccion of transacciones">
+                            <td>{{ transaccion.fecha }}</td>
+                            <td>{{ transaccion.tipo }}</td>
+                            <td>{{ transaccion.monto }}</td>
+                            <td>{{ transaccion.descripcion }}</td>
+                            <td>{{ transaccion.sucursal }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!-- Sección de Generación de Reportes -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Generación de Reportes Financieros</h4>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="generarReporte()">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="tipoReporte">Tipo de Reporte</label>
+                        <select id="tipoReporte" class="form-control" [(ngModel)]="tipoReporte" name="tipoReporte" required>
+                            <option value="">Seleccione...</option>
+                            <option value="mensual">Mensual</option>
+                            <option value="trimestral">Trimestral</option>
+                            <option value="anual">Anual</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="periodoReporte">Periodo</label>
+                        <input type="month" class="form-control" id="periodoReporte" [(ngModel)]="periodoReporte" name="periodoReporte" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Generar Reporte</button>
+            </form>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+    <br>
+    <br>
+    <br>
 
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Exportar Informes</h4>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="exportarInforme()" #exportarForm="ngForm">
+                <div class="form-group">
+                    <label for="formatoExportacion">Formato de Exportación</label>
+                    <select id="formatoExportacion" class="form-control" [(ngModel)]="formatoExportacion" name="formatoExportacion" required>
+                        <option value="">Seleccione...</option>
+                        <option value="pdf">PDF</option>
+                        <option value="excel">Excel</option>
+                    </select>
+                </div>
+                <button class="btn btn-info">Exportar Informe</button>
+            </form>
+        </div>
+    </div>
 
-<script>
-    // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAtlxkf9sE0egLbo9MgEDUC3tMenrZ7opY",
-  authDomain: "reservadehoteles-4385d.firebaseapp.com",
-  projectId: "reservadehoteles-4385d",
-  storageBucket: "reservadehoteles-4385d.appspot.com",
-  messagingSenderId: "917154432580",
-  appId: "1:917154432580:web:98a634212c315fe1985e11"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-</script>
+</div>
