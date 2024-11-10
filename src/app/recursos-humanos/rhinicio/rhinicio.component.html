@@ -1,48 +1,63 @@
 <div class="card">
-    <div class="card-header">
-      <h3>Programación de Turnos</h3>
-    </div>
-    <div class="card-body">
-      <form>
-        <div class="form-group">
-          <label for="empleadoId">ID del Empleado:</label>
-          <input type="number" class="form-control" id="empleadoId" required>
-        </div>
-        <div class="form-group">
-          <label for="fechaTurno">Fecha:</label>
-          <input type="date" class="form-control" id="fechaTurno" required>
-        </div>
-        <div class="form-group">
-          <label for="turno">Turno:</label>
-          <select class="form-control" id="turno">
-            <option>Matutino</option>
-            <option>Vespertino</option>
-            <option>Nocturno</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Programar Turno</button>
-      </form>
-    </div>
+  <div class="card-header">
+    <h3>Programación de Turnos</h3>
   </div>
+  <div class="card-body">
+    <form (ngSubmit)="programarTurno()">
+      <div class="form-group">
+        <label for="empleadoId">ID del Empleado:</label>
+        <input type="number" class="form-control" id="empleadoId" [(ngModel)]="empleadoId" name="empleadoId" required>
+      </div>
+      <div class="form-group">
+        <label for="fechaTurno">Fecha:</label>
+        <input type="date" class="form-control" id="fechaTurno" [(ngModel)]="fechaTurno" name="fechaTurno" required>
+      </div>
+      <div class="form-group">
+        <label for="turno">Turno:</label>
+        <select class="form-control" id="turno" [(ngModel)]="turno" name="turno" required>
+          <option value="">Selecciona un turno</option>
+          <option value="Matutino">Matutino</option>
+          <option value="Vespertino">Vespertino</option>
+          <option value="Nocturno">Nocturno</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Programar Turno</button>
+    </form>
+  </div>
+</div>
 
+
+  <br>
+  <br>
+  <br>
+  
   <div class="card">
     <div class="card-header">
       <h3>Registro de Asistencia</h3>
     </div>
     <div class="card-body">
-      <form>
+      <form (ngSubmit)="registrarAsistencia()">
         <div class="form-group">
           <label for="empleadoIdAsistencia">ID del Empleado:</label>
-          <input type="number" class="form-control" id="empleadoIdAsistencia" required>
+          <select class="form-control" id="empleadoIdAsistencia" [(ngModel)]="empleadoIdAsistencia" name="empleadoIdAsistencia" required>
+            <option *ngFor="let empleado of empleados" [value]="empleado.id">{{ empleado.nombre }}</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="fechaAsistencia">Fecha:</label>
-          <input type="date" class="form-control" id="fechaAsistencia" required>
+          <input type="date" class="form-control" id="fechaAsistencia" [(ngModel)]="fechaAsistencia" name="fechaAsistencia" required>
         </div>
         <button type="submit" class="btn btn-primary">Registrar Asistencia</button>
       </form>
     </div>
   </div>
+  
+
+  
+  <br>
+  <br>
+  <br>
+  <br>
 
   <div class="card">
     <div class="card-header">

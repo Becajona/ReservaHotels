@@ -12,12 +12,14 @@ import { RegistrarseInicioComponent } from './check/registrarse-inicio/registrar
 import { NavegacionModule } from './navegacion/navegacion.module'; 
 import { ReservacionesModule } from './reservaciones/reservaciones.module'; 
 import { ContaInicioComponent } from './contabilidad/conta-inicio/conta-inicio.component';
+import { RHInicioComponent } from './recursos-humanos/rhinicio/rhinicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrarseInicioComponent,
-    ContaInicioComponent
+    ContaInicioComponent,
+    RHInicioComponent,
     
   ],
   imports: [

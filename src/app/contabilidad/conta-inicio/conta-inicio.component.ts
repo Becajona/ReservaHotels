@@ -99,6 +99,10 @@ export class ContaInicioComponent implements OnInit {
     }
   }
 
+
+
+
+  
   // Exportar a PDF
   exportarPDF(): void {
     const doc = new jsPDF();
@@ -149,9 +153,16 @@ export class ContaInicioComponent implements OnInit {
     XLSX.writeFile(workbook, 'transacciones.xlsx');
   }
 
+  
   // Método para exportar informe
   exportarInforme(): void {
-    // Implementar la lógica para exportar el informe según el formato seleccionado
-    console.log(`Exportando informe en formato: ${this.formatoExportacion}`);
+    if (this.formatoExportacion === 'pdf') {
+      this.exportarPDF();
+    } else if (this.formatoExportacion === 'excel') {
+      this.exportarExcel();
+    } else {
+      alert('Por favor, selecciona un formato de exportación válido.');
+    }
   }
+  
 }
