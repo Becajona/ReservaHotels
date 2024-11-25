@@ -25,24 +25,25 @@ export class LoginComponent {
     this.rol = '';
   }
 
+  // Método para iniciar sesión
   async onLogin() {
     if (!this.email || !this.password || !this.rol) {
       alert('Por favor complete todos los campos');
       return;
     }
-  
+
     try {
       console.log("Intentando iniciar sesión con:", this.email, "y rol:", this.rol);
-  
+
       // Inicia sesión y recupera el rol del usuario desde Firestore
       const result = await this.authService.login(this.email, this.password);
       if (!result) {
         alert('Error: No se pudo autenticar al usuario.');
         return;
       }
-  
+
       console.log("Datos del usuario autenticado:", result);
-  
+
       // Comparar el rol ingresado con el almacenado en la base de datos
       if (result.rol === this.rol) {
         console.log("Rol válido, redireccionando...");
@@ -65,8 +66,8 @@ export class LoginComponent {
       }
     }
   }
-  
 
+  // Método para registrar un nuevo usuario
   async onRegister() {
     if (!this.email || !this.password || !this.rol) {
       alert('Por favor complete todos los campos');

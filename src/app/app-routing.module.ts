@@ -16,6 +16,8 @@ import { SucursalesInicioComponent } from './sucursales/sucursales-inicio/sucurs
 
 import { LoginComponent } from './auths/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { 

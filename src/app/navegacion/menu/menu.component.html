@@ -16,49 +16,54 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <!-- Reservaciones -->
-          <li class="nav-item">
-            <a class="nav-link"   href="inicio">Reservaciones</a>
+          <!-- Reservaciones (visible para admin y empleado) -->
+          <li class="nav-item" *ngIf="userRole">
+            <a class="nav-link" href="inicio">Reservaciones</a>
           </li>
           
-          <!-- Check-in/Check-out -->
-          <li class="nav-item">
+          <!-- Check-in/Check-out (visible para admin y empleado) -->
+          <li class="nav-item" *ngIf="userRole">
             <a class="nav-link" href="registrarse">Check-in/Check-out</a>
           </li>
-          <!-- Contabilidad -->
-          <li class="nav-item">
+
+          <!-- Contabilidad (solo visible para admin) -->
+          <li class="nav-item" *ngIf="userRole === 'admin'">
             <a class="nav-link" href="contabilidad">Contabilidad</a>
           </li>
-          <!-- Recursos Humanos -->
-          <li class="nav-item">
+
+          <!-- Recursos Humanos (solo visible para admin) -->
+          <li class="nav-item" *ngIf="userRole === 'admin'">
             <a class="nav-link" href="rhinicio">Recursos Humanos</a>
           </li>
-          <!-- Facturación -->
-          <li class="nav-item">
+
+          <!-- Facturación (visible para admin y empleado) -->
+          <li class="nav-item" *ngIf="userRole">
             <a class="nav-link" href="Facturacion">Facturación</a>
           </li>
-          <!-- Dropdown de subsecciones -->
-          <li class="nav-item dropdown">
+
+          <!-- Dropdown de subsecciones (visible para admin y empleado) -->
+          <li class="nav-item dropdown" *ngIf="userRole">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Más Opciones
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <!-- Subsección de Reservaciones -->
               <li><a class="dropdown-item" href="habitaciones">Tipo de Habitación</a></li>
-              <li><a class="dropdown-item" href="sucursales">Sucursales</a></li>
+              <li><a class="dropdown-item" href="sucursales" *ngIf="userRole === 'admin'">Sucursales</a></li>
               <li><hr class="dropdown-divider"></li>
-              <!-- Subsección de Check-in -->
               <li><a class="dropdown-item" href="#">Disponibilidad de Habitaciones</a></li>
               <li><a class="dropdown-item" href="#">Estado de las Habitaciones</a></li>
               <li><hr class="dropdown-divider"></li>
-              <!-- Subsección de Facturación -->
               <li><a class="dropdown-item" href="#">Detalles de Cargos</a></li>
               <li><hr class="dropdown-divider"></li>
-              <!-- Subsección de Recursos Humanos --> 
               <li><a class="dropdown-item" href="#">Registro de Asistencia</a></li>
               <li><a class="dropdown-item" href="#">Evaluaciones</a></li>
               <li><a class="dropdown-item" href="#">Contratación</a></li>
             </ul>
+          </li>
+          
+          <!-- Cerrar sesión -->
+          <li class="nav-item" *ngIf="userRole">
+            <a class="nav-link" href="#" (click)="logout()">Cerrar sesión</a>
           </li>
         </ul>
       </div>
