@@ -13,6 +13,7 @@ import { NavegacionModule } from './navegacion/navegacion.module';
 import { ReservacionesModule } from './reservaciones/reservaciones.module'; 
 import { ContaInicioComponent } from './contabilidad/conta-inicio/conta-inicio.component';
 import { RHInicioComponent } from './recursos-humanos/rhinicio/rhinicio.component';
+import { LoginComponent } from './auths/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RHInicioComponent } from './recursos-humanos/rhinicio/rhinicio.componen
     RegistrarseInicioComponent,
     ContaInicioComponent,
     RHInicioComponent,
+    LoginComponent
     
   ],
   imports: [

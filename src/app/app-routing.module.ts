@@ -14,36 +14,53 @@ import { FacturacionInicioComponent } from './facturacion/facturacion-inicio/fac
 import { HabitacionesComponent } from './tipode-habitacion/habitaciones/habitaciones.component';
 import { SucursalesInicioComponent } from './sucursales/sucursales-inicio/sucursales-inicio.component';
 
+import { LoginComponent } from './auths/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
-  {
-    path:'inicio',
-    component: InicioComponent
-    },
-    {
-      path:'registrarse',
-      component: RegistrarseInicioComponent
-      },
-      {
-        path:'contabilidad',   
-        component: ContaInicioComponent
-        },
-        {
-          path:'rhinicio', 
-          component: RHInicioComponent
-          },
-          {
-            path:'Facturacion',
-            component: FacturacionInicioComponent
-            },
-            {
-              path:'habitaciones',   
-              component: HabitacionesComponent
-              },
-              {
-                path:'sucursales',
-                component: SucursalesInicioComponent
-                },
-
+  { path: 'login', component: LoginComponent },
+  { 
+    path: 'inicio',
+    component: InicioComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'empleado'] }
+  },
+  { 
+    path: 'registrarse',
+    component: RegistrarseInicioComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'empleado'] }
+  },
+  { 
+    path: 'contabilidad',
+    component: ContaInicioComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] }
+  },
+  { 
+    path: 'rhinicio',
+    component: RHInicioComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] }
+  },
+  { 
+    path: 'Facturacion',
+    component: FacturacionInicioComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'empleado'] }
+  },
+  { 
+    path: 'habitaciones',
+    component: HabitacionesComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'empleado'] }
+  },
+  { 
+    path: 'sucursales',
+    component: SucursalesInicioComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] }
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
